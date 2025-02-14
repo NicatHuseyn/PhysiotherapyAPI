@@ -1,0 +1,6 @@
+@PhysiothreapyApp.WebApi_HostAddress = http://localhost:5219
+
+GET {{PhysiothreapyApp.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

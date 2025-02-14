@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{47E06B8E-EF12-4F7A-BBF9-E8451B41FAD2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhysiothreapyApp.Domain", "src\PhysiothreapyApp.Domain\PhysiothreapyApp.Domain.csproj", "{7F555CA1-BC15-4EA0-8CFB-E0B691B6FA0E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhysiothreapyApp.Application", "src\PhysiothreapyApp.Application\PhysiothreapyApp.Application.csproj", "{C99FCE45-BD0E-468C-9583-2AE5C6740B7A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhysiothreapyApp.Infrastructure", "src\PhysiothreapyApp.Infrastructure\PhysiothreapyApp.Infrastructure.csproj", "{7CE83A59-EA40-4C97-B1D8-2A80DBC61742}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhysiothreapyApp.WebApi", "src\PhysiothreapyApp.WebApi\PhysiothreapyApp.WebApi.csproj", "{4018B41C-E0E4-4A0F-B9BF-D8B383B8A78D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7F555CA1-BC15-4EA0-8CFB-E0B691B6FA0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F555CA1-BC15-4EA0-8CFB-E0B691B6FA0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F555CA1-BC15-4EA0-8CFB-E0B691B6FA0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F555CA1-BC15-4EA0-8CFB-E0B691B6FA0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C99FCE45-BD0E-468C-9583-2AE5C6740B7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C99FCE45-BD0E-468C-9583-2AE5C6740B7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C99FCE45-BD0E-468C-9583-2AE5C6740B7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C99FCE45-BD0E-468C-9583-2AE5C6740B7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CE83A59-EA40-4C97-B1D8-2A80DBC61742}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CE83A59-EA40-4C97-B1D8-2A80DBC61742}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CE83A59-EA40-4C97-B1D8-2A80DBC61742}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CE83A59-EA40-4C97-B1D8-2A80DBC61742}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4018B41C-E0E4-4A0F-B9BF-D8B383B8A78D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4018B41C-E0E4-4A0F-B9BF-D8B383B8A78D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4018B41C-E0E4-4A0F-B9BF-D8B383B8A78D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4018B41C-E0E4-4A0F-B9BF-D8B383B8A78D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7F555CA1-BC15-4EA0-8CFB-E0B691B6FA0E} = {47E06B8E-EF12-4F7A-BBF9-E8451B41FAD2}
+		{C99FCE45-BD0E-468C-9583-2AE5C6740B7A} = {47E06B8E-EF12-4F7A-BBF9-E8451B41FAD2}
+		{7CE83A59-EA40-4C97-B1D8-2A80DBC61742} = {47E06B8E-EF12-4F7A-BBF9-E8451B41FAD2}
+		{4018B41C-E0E4-4A0F-B9BF-D8B383B8A78D} = {47E06B8E-EF12-4F7A-BBF9-E8451B41FAD2}
+	EndGlobalSection
+EndGlobal
