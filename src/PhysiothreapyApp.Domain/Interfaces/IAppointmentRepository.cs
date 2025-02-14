@@ -2,6 +2,6 @@
 
 namespace PhysiothreapyApp.Domain.Interfaces;
 
-public interface IAppointmentRepository:IGenericRepository<Appointment>
+public interface IAppointmentRepository
 {
 }

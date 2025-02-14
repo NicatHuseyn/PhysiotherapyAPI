@@ -8,7 +8,7 @@ public class Appointment : Entity
     public Guid PatientId { get; set; }
     public Patient Patient { get; set; } = default!;
 
-    public DateTime AppointmentDateTime { get; set; }
+    public DateOnly AppointmentDateTime { get; set; }
     public TimeSpan Duration { get; set; }
     public AppointmentStatus Status { get; set; }
     public string Notes { get; set; } = default!;
