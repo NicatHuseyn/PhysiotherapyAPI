@@ -94,8 +94,12 @@ public class GenericRepository<TEntity, TContext> : IGenericRepository<TEntity>
     public async Task<TEntity?> GetByIdAsync(Guid id, bool isTrackingActive = true, params Expression<Func<TEntity, object>>[] includes)
     {
         var query = Entity.AsQueryable();
+
+        foreach (var include in includes)
+            query = query.Include(include);
+
         if (!isTrackingActive)
-            query.AsNoTracking();
+            query = query.AsNoTracking();
 
         return await query.FirstOrDefaultAsync(x=>x.Id == id);
     }

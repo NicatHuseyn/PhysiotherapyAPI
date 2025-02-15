@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
+﻿using System.Net;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace PhysiothreapyApp.Application.Wrappers;
 
@@ -15,10 +10,10 @@ public sealed class Result<T>
     public T? Data { get; set; }
 
     [JsonPropertyName("errorMessages")]
-    public List<string>? ErrorMessages { get; set; }
+    public List<string> ErrorMessages { get; set; } = new();
 
     [JsonPropertyName("isSuccessful")]
-    public bool IsSuccessful { get; set; } = true;
+    public bool IsSuccessful { get; set; }
 
     [JsonPropertyName("statusCode")]
     public HttpStatusCode StatusCode { get; set; }
@@ -26,73 +21,45 @@ public sealed class Result<T>
     [JsonConstructor]
     public Result()
     {
-        
     }
 
-    public Result(T data)
+    private Result(T data)
     {
         Data = data;
+        IsSuccessful = true;
+        StatusCode = HttpStatusCode.OK;
     }
 
-
-    public Result(List<string> errorMessages, HttpStatusCode statusCode = HttpStatusCode.OK)
+    private Result(List<string> errorMessages, HttpStatusCode statusCode)
     {
         IsSuccessful = false;
         StatusCode = statusCode;
         ErrorMessages = errorMessages;
     }
 
-
-    public Result(string errorMessage,HttpStatusCode statusCode = HttpStatusCode.OK)
+    private Result(string errorMessage, HttpStatusCode statusCode)
     {
-        IsSuccessful = true;
+        IsSuccessful = false;
         StatusCode = statusCode;
         ErrorMessages = [errorMessage];
     }
 
-
-    public static implicit operator Result<T>(T data)
-    {
-        return new Result<T>(data);
-    }
+    public static implicit operator Result<T>(T data) => new(data);
 
     public static implicit operator Result<T>((List<string> errorMessages, HttpStatusCode statusCode) parameters)
-    {
-        return new Result<T>(parameters.errorMessages,parameters.statusCode);
-    }
+        => new(parameters.errorMessages, parameters.statusCode);
 
     public static implicit operator Result<T>((string errorMessage, HttpStatusCode statusCode) parameters)
-    {
-        return new Result<T>(parameters.errorMessage, parameters.statusCode);
-    }
+        => new(parameters.errorMessage, parameters.statusCode);
 
-    public static Result<T> Succed(T data)
-    {
-        return new Result<T>(data);
-    }
+    public static Result<T> Succeed(T data) => new(data);
 
     public static Result<T> Failure(List<string> errorMessages, HttpStatusCode statusCode = HttpStatusCode.BadRequest)
-    {
-        return new Result<T>(errorMessages, statusCode);
-    }
+        => new(errorMessages, statusCode);
 
     public static Result<T> Failure(string errorMessage, HttpStatusCode statusCode = HttpStatusCode.BadRequest)
-    {
-        return new Result<T>(errorMessage, statusCode);
-    }
+        => new(errorMessage, statusCode);
 
-    public static Result<T> Failure(string errorMessage)
-    {
-        return new Result<T>(errorMessage, HttpStatusCode.InternalServerError);
-    }
-
-    public static Result<T> Failure(List<string> errorMessages)
-    {
-        return new Result<T>(errorMessages, HttpStatusCode.InternalServerError);
-    }
-
-    public override string ToString()
-    {
-        return JsonSerializer.Serialize(this);
-    }
+    public override string ToString() => JsonSerializer.Serialize(this);
 }
+

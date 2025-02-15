@@ -1,5 +1,7 @@
+using PhysiothreapyApp.Application;
 using PhysiothreapyApp.Domain.Options;
 using PhysiothreapyApp.Infrastructure;
+using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,7 +25,9 @@ builder.Configuration.SetBasePath(Directory.GetCurrentDirectory())
 
 #region Custom Extension Services
 builder.Services.AddInfrastructureService(builder.Configuration);
+builder.Services.AddApplicationService();
 #endregion
+
 
 
 builder.Services.AddControllers();
@@ -35,12 +39,14 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.MapScalarApiReference();
     app.MapOpenApi();
 }
 
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+app.UseAuthentication();
 
 app.MapControllers();
 

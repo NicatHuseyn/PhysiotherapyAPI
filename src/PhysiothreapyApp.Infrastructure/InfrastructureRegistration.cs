@@ -1,11 +1,19 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using PhysiothreapyApp.Application;
+using PhysiothreapyApp.Application.Behaviors;
+using PhysiothreapyApp.Application.Filters;
 using PhysiothreapyApp.Domain;
+using PhysiothreapyApp.Domain.Interfaces;
+using PhysiothreapyApp.Domain.Models.IdentityModels;
 using PhysiothreapyApp.Domain.Options;
 using PhysiothreapyApp.Infrastructure.Persistence.Contexts;
 using PhysiothreapyApp.Infrastructure.Persistence.Interceptors;
+using PhysiothreapyApp.Infrastructure.Persistence.Repositories;
 using Scrutor;
 
 namespace PhysiothreapyApp.Infrastructure;
@@ -22,6 +30,8 @@ public static class InfrastructureRegistration
         {
             options.UseSqlServer(connectionString!.SqlServer, sqlServerOptionsAction =>
             {
+                sqlServerOptionsAction.EnableRetryOnFailure();
+
                 sqlServerOptionsAction.MigrationsAssembly(typeof(PhysiothreapyAppDbContext).Assembly.FullName);
             });
 
@@ -32,10 +42,18 @@ public static class InfrastructureRegistration
 
         #region Scrutor Configurations
         services.Scan(scan => scan
-        .FromAssemblies(typeof(DomainAssembly).Assembly, typeof(InfrastructureAssembly).Assembly)
+        .FromAssemblies(typeof(DomainAssembly).Assembly, typeof(ApplicationAssembly).Assembly, typeof(InfrastructureAssembly).Assembly)
         .AddClasses(publicOnly: false)
         .UsingRegistrationStrategy(RegistrationStrategy.Skip)
         .AsMatchingInterface()
+        .WithScopedLifetime()
+
+        //.AddClasses(classes => classes.AssignableTo(typeof(IGenericRepository<>)))
+        //.AsImplementedInterfaces()
+        //.WithScopedLifetime()
+
+        .AddClasses(classes => classes.AssignableTo(typeof(NotFoundFilter<>)))
+        .AsImplementedInterfaces()
         .WithScopedLifetime()
         );
         #endregion
@@ -43,6 +61,14 @@ public static class InfrastructureRegistration
 
         // Closed .NET Default Messages
         services.Configure<ApiBehaviorOptions>(options=>options.SuppressModelStateInvalidFilter =true);
+
+
+        #region Identity Configurations
+        services
+            .AddIdentity<AppUser, IdentityRole>()
+            .AddEntityFrameworkStores<PhysiothreapyAppDbContext>()
+            .AddDefaultTokenProviders();
+        #endregion
 
         return services;
     }

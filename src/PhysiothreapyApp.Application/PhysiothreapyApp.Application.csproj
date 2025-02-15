@@ -17,4 +17,8 @@
     <ProjectReference Include="..\PhysiothreapyApp.Domain\PhysiothreapyApp.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\AuthFeatures\Register\Queries\" />
+  </ItemGroup>
+
 </Project>
