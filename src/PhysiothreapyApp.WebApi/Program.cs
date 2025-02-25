@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.RateLimiting;
 using PhysiothreapyApp.Application;
 using PhysiothreapyApp.Domain.Options;
 using PhysiothreapyApp.Infrastructure;
@@ -8,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 
-#region Options Bind
+#region Options Binding
 builder.Services.Configure<ConnectionStringOption>(builder.Configuration.GetSection(ConnectionStringOption.Key));
 
 //builder.Services.Configure<CustomTokenOption>(builder.Configuration.GetSection(CustomTokenOption.Key));
@@ -31,6 +32,20 @@ builder.Services.AddApplicationService();
 
 
 builder.Services.AddControllers();
+
+#region RateLimit Configuration
+builder.Services.AddRateLimiter(options =>
+{
+    options.AddFixedWindowLimiter("fixed", cfg =>
+    {
+        cfg.QueueLimit = 100;
+        cfg.Window = TimeSpan.FromSeconds(5);
+        cfg.PermitLimit = 100;
+        cfg.QueueProcessingOrder = System.Threading.RateLimiting.QueueProcessingOrder.OldestFirst;
+    });
+});
+#endregion
+
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
@@ -48,6 +63,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 app.UseAuthentication();
 
-app.MapControllers();
+app.MapControllers().RequireRateLimiting("fixed");
 
 app.Run();

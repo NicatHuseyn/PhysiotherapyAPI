@@ -15,6 +15,6 @@ public class Doctor : Entity
     public string? WorkingHours { get; set; }
     public decimal ConsultationFees { get; set; }
 
-    public virtual ICollection<Appointment> Appointments { get; set; } = default!;
-    public virtual ICollection<Treatment> Treatments { get; set; } = default!;
+    public virtual ICollection<Appointment>? Appointments { get; set; }
+    public virtual ICollection<Treatment>? Treatments { get; set; }
 }

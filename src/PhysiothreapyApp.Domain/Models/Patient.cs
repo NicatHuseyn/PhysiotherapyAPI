@@ -16,7 +16,7 @@ public class Patient : Entity
     public string? EmergencyContactPhone { get; set; }
 
     public virtual MedicalHistory? MedicalHistory { get; set; }
-    public virtual ICollection<Appointment> Appointments { get; set; } = default!;
-    public virtual ICollection<Treatment> Treatments { get; set; } = default!;
-    public virtual ICollection<Document> Documents { get; set; } = default!;
+    public virtual ICollection<Appointment>? Appointments { get; set; }
+    public virtual ICollection<Treatment>? Treatments { get; set; }
+    public virtual ICollection<Document>? Documents { get; set; }
 }

@@ -26,6 +26,6 @@ public class Treatment : Entity
 
     public bool RequiresFollowUp { get; set; }
 
-    public virtual ICollection<Exercise> Exercises { get; set; } = default!;
-    public virtual ICollection<Document> Documents { get; set; } = default!;
+    public virtual ICollection<Exercise>? Exercises { get; set; }
+    public virtual ICollection<Document>? Documents { get; set; }
 }

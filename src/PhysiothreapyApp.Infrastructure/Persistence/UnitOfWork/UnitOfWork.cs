@@ -36,6 +36,7 @@ public class UnitOfWork : IUnitOfWork
         try
         {
             var changes = await SaveChangesAsync();
+
             if (state && _transaction != null)
             {
                 await _transaction.CommitAsync();

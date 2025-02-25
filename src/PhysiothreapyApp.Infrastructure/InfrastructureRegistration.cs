@@ -1,19 +1,17 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PhysiothreapyApp.Application;
-using PhysiothreapyApp.Application.Behaviors;
+using PhysiothreapyApp.Application.Features.DoctorFeatures.Services;
 using PhysiothreapyApp.Application.Filters;
 using PhysiothreapyApp.Domain;
-using PhysiothreapyApp.Domain.Interfaces;
 using PhysiothreapyApp.Domain.Models.IdentityModels;
 using PhysiothreapyApp.Domain.Options;
 using PhysiothreapyApp.Infrastructure.Persistence.Contexts;
 using PhysiothreapyApp.Infrastructure.Persistence.Interceptors;
-using PhysiothreapyApp.Infrastructure.Persistence.Repositories;
+using PhysiothreapyApp.Infrastructure.Services.DoctorServices;
 using Scrutor;
 
 namespace PhysiothreapyApp.Infrastructure;
@@ -47,10 +45,6 @@ public static class InfrastructureRegistration
         .UsingRegistrationStrategy(RegistrationStrategy.Skip)
         .AsMatchingInterface()
         .WithScopedLifetime()
-
-        //.AddClasses(classes => classes.AssignableTo(typeof(IGenericRepository<>)))
-        //.AsImplementedInterfaces()
-        //.WithScopedLifetime()
 
         .AddClasses(classes => classes.AssignableTo(typeof(NotFoundFilter<>)))
         .AsImplementedInterfaces()
